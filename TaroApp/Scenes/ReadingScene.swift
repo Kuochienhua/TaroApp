@@ -169,17 +169,6 @@ struct ReadingScene: View {
                                     .font(.custom("Georgia", size: 13))
                                     .foregroundColor(gold.opacity(0.7))
                                     .tracking(2)
-                                if dc.isReversed {
-                                    Text("逆位")
-                                        .font(.system(size: 11))
-                                        .foregroundColor(gold.opacity(0.55))
-                                        .padding(.horizontal, 7)
-                                        .padding(.vertical, 2)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 4)
-                                                .strokeBorder(gold.opacity(0.4), lineWidth: 0.5)
-                                        )
-                                }
                             }
                         }
                     }
@@ -386,17 +375,6 @@ struct ReadingScene: View {
                 .font(.custom("Georgia", size: 12))
                 .foregroundColor(Color(hex: "#e8d5a3").opacity(0.9))
 
-            if dc.isReversed {
-                Text("逆位")
-                    .font(.system(size: 10))
-                    .foregroundColor(gold.opacity(0.5))
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 4)
-                            .strokeBorder(gold.opacity(0.4), lineWidth: 0.5)
-                    )
-            }
         }
     }
 

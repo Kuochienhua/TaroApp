@@ -245,9 +245,9 @@ final class MLXReadingService: ObservableObject {
         case .overall:
             guard !cards.isEmpty else { return (system, "") }
             let cardDescriptions = cards.map { dc -> String in
-                let meaning = dc.isReversed ? dc.card.reversed : dc.card.upright
+                let meaning = dc.card.upright
                 return """
-                【\(dc.position)：\(dc.card.name)（\(dc.isReversed ? "逆位" : "正位")）】
+                【\(dc.position)：\(dc.card.name)（正位）】
                 元素：\(dc.card.element)，關鍵詞：\(dc.card.keywords.joined(separator: "、"))
                 牌義參考：\(meaning.general)
                 """
@@ -273,14 +273,14 @@ final class MLXReadingService: ObservableObject {
         case .single(let index):
             guard index < cards.count else { return (system, "") }
             let dc = cards[index]
-            let meaning = dc.isReversed ? dc.card.reversed : dc.card.upright
+            let meaning = dc.card.upright
             let questionHeader = hasQuestion
                 ? "問卜者的問題：「\(trimmedQuestion)」\n\n"
                 : ""
             let user = """
             \(questionHeader)請用白話文深度解讀這張牌，所有解讀都必須緊扣上面的問題：
 
-            【\(dc.position)：\(dc.card.name)（\(dc.isReversed ? "逆位" : "正位")）】
+            【\(dc.position)：\(dc.card.name)（正位）】
             元素：\(dc.card.element)，關鍵詞：\(dc.card.keywords.joined(separator: "、"))
             牌義參考：\(meaning.general)
 
@@ -315,9 +315,9 @@ final class MLXReadingService: ObservableObject {
         let present = cards[1]
         let future  = cards[2]
 
-        let pastM    = past.isReversed    ? past.card.reversed    : past.card.upright
-        let presentM = present.isReversed ? present.card.reversed : present.card.upright
-        let futureM  = future.isReversed  ? future.card.reversed  : future.card.upright
+        let pastM    = past.card.upright
+        let presentM = present.card.upright
+        let futureM  = future.card.upright
 
         let analysis = SpreadAnalyzer.analyze(cards)
 
@@ -334,7 +334,7 @@ final class MLXReadingService: ObservableObject {
 
         ══════════════════════
 
-        ◈ \(past.position)之牌 · \(past.card.name)（\(past.isReversed ? "逆位" : "正位")）
+        ◈ \(past.position)之牌 · \(past.card.name)（正位）
         元素：\(past.card.element)
 
         \(pastM.general)
@@ -349,7 +349,7 @@ final class MLXReadingService: ObservableObject {
 
         ══════════════════════
 
-        ◈ \(present.position)之牌 · \(present.card.name)（\(present.isReversed ? "逆位" : "正位")）
+        ◈ \(present.position)之牌 · \(present.card.name)（正位）
         元素：\(present.card.element)
 
         \(presentM.general)
@@ -364,7 +364,7 @@ final class MLXReadingService: ObservableObject {
 
         ══════════════════════
 
-        ◈ \(future.position)之牌 · \(future.card.name)（\(future.isReversed ? "逆位" : "正位")）
+        ◈ \(future.position)之牌 · \(future.card.name)（正位）
         元素：\(future.card.element)
 
         \(futureM.general)
@@ -405,13 +405,13 @@ final class MLXReadingService: ObservableObject {
         guard cards.count > 3 else { return "" }
         var text = ""
         for dc in cards.dropFirst(3) {
-            let m = dc.isReversed ? dc.card.reversed : dc.card.upright
+            let m = dc.card.upright
             text += """
 
 
         ══════════════════════
 
-        ◈ \(dc.position)之牌 · \(dc.card.name)（\(dc.isReversed ? "逆位" : "正位")）
+        ◈ \(dc.position)之牌 · \(dc.card.name)（正位）
         元素：\(dc.card.element)
 
         \(m.general)
@@ -427,8 +427,8 @@ final class MLXReadingService: ObservableObject {
     }
 
     private func generateSingle(card: DrawnCard) -> String {
-        let meaning = card.isReversed ? card.card.reversed : card.card.upright
-        let orientation = card.isReversed ? "逆位" : "正位"
+        let meaning = card.card.upright
+        let orientation = "正位"
 
         let positionContext: String
         switch card.position {
@@ -439,9 +439,7 @@ final class MLXReadingService: ObservableObject {
         }
 
         let arcanaLabel = card.card.arcana == "major" ? "大阿爾克納" : "小阿爾克納"
-        let reversedNote = card.isReversed
-            ? "逆位提示這股能量正以更內斂的方式運作，邀請你審視尚未被意識到的內在阻力或被壓抑的潛力。"
-            : "正位顯示此牌的能量正清晰而外顯地流動，是你此刻可以善用的核心資源。"
+        let reversedNote = "正位顯示此牌的能量正清晰而外顯地流動，是你此刻可以善用的核心資源。"
 
         return """
         ✦ \(card.position)之牌 · \(card.card.name)（\(orientation)）✦

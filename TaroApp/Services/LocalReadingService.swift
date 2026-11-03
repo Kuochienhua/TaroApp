@@ -8,8 +8,8 @@ struct LocalReadingService {
 
     static func interpretCard(_ drawn: DrawnCard) -> String {
         let card = drawn.card
-        let meaning = drawn.isReversed ? card.reversed : card.upright
-        let orientation = drawn.isReversed ? "逆位" : "正位"
+        let meaning = card.upright
+        let orientation = "正位"
 
         return """
         ✦ \(drawn.position) · \(card.name)（\(orientation)）✦
@@ -38,22 +38,22 @@ struct LocalReadingService {
         let present = cards[1]
         let future  = cards[2]
 
-        let pastMeaning    = past.isReversed    ? past.card.reversed    : past.card.upright
-        let presentMeaning = present.isReversed ? present.card.reversed : present.card.upright
-        let futureMeaning  = future.isReversed  ? future.card.reversed  : future.card.upright
+        let pastMeaning    = past.card.upright
+        let presentMeaning = present.card.upright
+        let futureMeaning  = future.card.upright
 
         return """
         ✦ 三牌陣 · 命運之鏡 ✦
 
         \(openingNarrative(past: past, present: present, future: future))
 
-        ◈ \(past.position) · \(past.card.name)（\(past.isReversed ? "逆位" : "正位")）
+        ◈ \(past.position) · \(past.card.name)（正位）
         \(pastMeaning.general)
 
-        ◈ \(present.position) · \(present.card.name)（\(present.isReversed ? "逆位" : "正位")）
+        ◈ \(present.position) · \(present.card.name)（正位）
         \(presentMeaning.general)
 
-        ◈ \(future.position) · \(future.card.name)（\(future.isReversed ? "逆位" : "正位")）
+        ◈ \(future.position) · \(future.card.name)（正位）
         \(futureMeaning.general)
 
         ✦ 命運之語 ✦
@@ -89,9 +89,9 @@ struct LocalReadingService {
         let presentKeyword = present.card.keywords.first ?? present.card.name
         let futureKeyword  = future.card.keywords.first  ?? future.card.name
 
-        let pastSuffix    = past.isReversed    ? "的陰影曾在你身後留下印記" : "的光芒在你的過去留下了深刻的烙印"
-        let presentSuffix = present.isReversed ? "的課題正在此刻等待你轉化" : "的力量此刻就在你的雙手之中"
-        let futureSuffix  = future.isReversed  ? "的提醒在前方溫柔等候"     : "的祝福正在前方為你展開"
+        let pastSuffix    = "的光芒在你的過去留下了深刻的烙印"
+        let presentSuffix = "的力量此刻就在你的雙手之中"
+        let futureSuffix  = "的祝福正在前方為你展開"
 
         return """
         \(pastKeyword)\(pastSuffix)；\

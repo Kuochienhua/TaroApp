@@ -129,39 +129,11 @@ struct SpreadAnalyzer {
     // MARK: - Energy flow
 
     private static func energyFlow(_ past: DrawnCard, _ present: DrawnCard, _ future: DrawnCard) -> String {
-        let pastReversed    = past.isReversed
-        let presentReversed = present.isReversed
-        let futureReversed  = future.isReversed
-        let reversedCount   = [pastReversed, presentReversed, futureReversed].filter { $0 }.count
-
         let pastCard    = past.card.name
         let presentCard = present.card.name
         let futureCard  = future.card.name
 
-        let pastDesc    = pastReversed    ? "（逆位，能量受阻或內化）" : "（正位，能量順流）"
-        let presentDesc = presentReversed ? "（逆位，正面臨內在挑戰）" : "（正位，能量正在顯化）"
-        let futureDesc  = futureReversed  ? "（逆位，前方仍有課題待整合）" : "（正位，能量正向展開）"
-
-        var flow = "能量流動路徑：\n\(pastCard)\(pastDesc) → \(presentCard)\(presentDesc) → \(futureCard)\(futureDesc)\n\n"
-
-        switch reversedCount {
-        case 0:
-            flow += "三張牌均為正位，能量流動順暢而清晰。過去的經歷化為養分，當下的行動充滿力量，未來的展望令人振奮。此刻你正處於一個能量高度流通的美好狀態。"
-        case 1:
-            if pastReversed {
-                flow += "過去的能量曾經受阻或被壓抑，但這段經歷已成為你靈魂最深刻的導師。它的教訓正在當下開花，為你未來的光明道路奠定了不可或缺的基礎。"
-            } else if presentReversed {
-                flow += "當下的能量正在面臨內在的挑戰與整合，這是一個重要的轉化期。過去為你累積了豐厚的資糧，只需穿越眼前的迷霧，明亮的未來正在等待。"
-            } else {
-                flow += "過去的根基穩固，當下的行動充滿活力，而未來的能量需要更多的內在整合。這提醒你，外在成就需要配合內在的成長才能真正持久。"
-            }
-        case 2:
-            flow += "兩張逆位牌顯示目前生命中有許多能量正在向內流動，這是深度整合與內在轉化的時期。雖然外在進展可能感覺緩慢，但內心正在發生深刻而重要的蛻變。"
-        case 3:
-            flow += "三張牌均為逆位，提示你需要向內探索。外在世界的路暫時閉塞，是因為靈魂正在邀請你向內尋找答案。這是蛻變最深刻的時刻，在靜止中孕育著巨大的轉化力量。"
-        default:
-            break
-        }
+        let flow = "能量流動路徑：\n\(pastCard)（正位，能量順流）→ \(presentCard)（正位，能量正在顯化）→ \(futureCard)（正位，能量正向展開）\n\n三張牌均為正位，能量流動順暢而清晰。過去的經歷化為養分，當下的行動充滿力量，未來的展望令人振奮。此刻你正處於一個能量高度流通的美好狀態。"
 
         return flow
     }
@@ -173,18 +145,15 @@ struct SpreadAnalyzer {
         let p = past.card.name
         let pr = present.card.name
         let f = future.card.name
-        let pO = past.isReversed ? "逆位的" : ""
-        let prO = present.isReversed ? "逆位的" : ""
-        let fO = future.isReversed ? "逆位的" : ""
 
         return """
         這次牌陣為你描繪了一幅清晰的靈魂地圖。
 
-        \(pO)\(p)守護著你的過去，那些走過的路、學過的課、承受過的重量，如今都化為你靈魂深處最珍貴的寶藏。
+        \(p)守護著你的過去，那些走過的路、學過的課、承受過的重量，如今都化為你靈魂深處最珍貴的寶藏。
 
-        站在當下，\(prO)\(pr)正在引導你。這張牌是此刻你最需要聆聽的聲音，它揭示了你當前所處的能量狀態，以及你現在最需要的覺察與行動。
+        站在當下，\(pr)正在引導你。這張牌是此刻你最需要聆聽的聲音，它揭示了你當前所處的能量狀態，以及你現在最需要的覺察與行動。
 
-        而\(fO)\(f)在未來的位置閃爍著光芒，它不是一個固定的命運，而是一個正在成形的可能性——你今日所播下的種子，將在這裡開花結果。
+        而\(f)在未來的位置閃爍著光芒，它不是一個固定的命運，而是一個正在成形的可能性——你今日所播下的種子，將在這裡開花結果。
 
         三張牌合而觀之，訴說的是一個關於\(past.card.themes.first ?? "成長")、\(present.card.themes.first ?? "轉化")與\(future.card.themes.first ?? "未來")的故事，而你，正是這個故事最重要的作者。
         """
