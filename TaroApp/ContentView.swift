@@ -1,61 +1,67 @@
-//
-//  ContentView.swift
-//  TaroApp
-//
-//  Created by 郭健華 on 2026/3/31.
-//
-
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @StateObject private var gameState = GameStateViewModel()
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
-        }
-    }
+        ZStack {
+            AppColors.mysteryBlack
+                .ignoresSafeArea()
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
+            switch gameState.currentScene {
+            case .intro:
+                IntroScene {
+                    gameState.advance()
+                }
+                .transition(.opacity)
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+            case .cascade:
+                CascadeScene {
+                    gameState.advance()
+                }
+                .transition(.opacity)
+
+            case .table:
+                TableScene {
+                    gameState.advance()
+                }
+                .transition(.opacity)
+
+            case .question:
+                QuestionScene(
+                    question: $gameState.userQuestion,
+                    selectedSpread: $gameState.selectedSpread
+                ) {
+                    gameState.advance()
+                }
+                .transition(.opacity)
+
+            case .mystic:
+                MysticScene {
+                    gameState.drawCards()
+                }
+                .transition(.opacity)
+
+            case .drawing:
+                DrawScene(drawnCards: gameState.drawnCards) {
+                    gameState.advance()
+                }
+                .transition(.opacity)
+
+            case .reading:
+                ReadingScene(
+                    drawnCards: gameState.drawnCards,
+                    userQuestion: gameState.userQuestion
+                ) {
+                    gameState.reset()
+                }
+                .transition(.opacity)
             }
         }
+        .animation(.easeInOut(duration: 0.5), value: gameState.currentScene)
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }

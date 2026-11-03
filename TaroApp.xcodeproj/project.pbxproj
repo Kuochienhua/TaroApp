@@ -6,13 +6,33 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A1B2C3042F7B0001009AA857 /* MLXLLM in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3022F7B0001009AA857 /* MLXLLM */; };
+		A1B2C3052F7B0001009AA857 /* MLXLMCommon in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3032F7B0001009AA857 /* MLXLMCommon */; };
+		D7E228592F7B8CAD009AA857 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D7E228582F7B8CAD009AA857 /* Config.xcconfig */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		D7E228192F7B8A61009AA857 /* TaroApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaroApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7E228582F7B8CAD009AA857 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D7E2285B2F7B8E07009AA857 /* Exceptions for "TaroApp" folder in "TaroApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = D7E228182F7B8A61009AA857 /* TaroApp */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D7E2281B2F7B8A61009AA857 /* TaroApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D7E2285B2F7B8E07009AA857 /* Exceptions for "TaroApp" folder in "TaroApp" target */,
+			);
 			path = TaroApp;
 			sourceTree = "<group>";
 		};
@@ -23,6 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1B2C3042F7B0001009AA857 /* MLXLLM in Frameworks */,
+				A1B2C3052F7B0001009AA857 /* MLXLMCommon in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -34,6 +56,7 @@
 			children = (
 				D7E2281B2F7B8A61009AA857 /* TaroApp */,
 				D7E2281A2F7B8A61009AA857 /* Products */,
+				D7E228582F7B8CAD009AA857 /* Config.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +88,8 @@
 			);
 			name = TaroApp;
 			packageProductDependencies = (
+				A1B2C3022F7B0001009AA857 /* MLXLLM */,
+				A1B2C3032F7B0001009AA857 /* MLXLMCommon */,
 			);
 			productName = TaroApp;
 			productReference = D7E228192F7B8A61009AA857 /* TaroApp.app */;
@@ -94,6 +119,9 @@
 			);
 			mainGroup = D7E228102F7B8A61009AA857;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D70A1CB12F8E6215004AA8D9 /* XCRemoteSwiftPackageReference "mlx-swift-examples" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D7E2281A2F7B8A61009AA857 /* Products */;
 			projectDirPath = "";
@@ -109,6 +137,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7E228592F7B8CAD009AA857 /* Config.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +156,7 @@
 /* Begin XCBuildConfiguration section */
 		D7E228242F7B8A62009AA857 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7E228582F7B8CAD009AA857 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -191,6 +221,7 @@
 		};
 		D7E228252F7B8A62009AA857 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7E228582F7B8CAD009AA857 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -248,6 +279,7 @@
 		};
 		D7E228272F7B8A62009AA857 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7E228582F7B8CAD009AA857 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -256,11 +288,16 @@
 				DEVELOPMENT_TEAM = NL876SK67W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TaroApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "塔羅好朋友";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Chienhua Kuo";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -280,6 +317,7 @@
 		};
 		D7E228282F7B8A62009AA857 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7E228582F7B8CAD009AA857 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -288,11 +326,16 @@
 				DEVELOPMENT_TEAM = NL876SK67W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TaroApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "塔羅好朋友";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Chienhua Kuo";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,6 +375,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A1B2C3012F7B0001009AA857 /* XCRemoteSwiftPackageReference "mlx-swift-examples" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ml-explore/mlx-swift-examples";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.21.0;
+			};
+		};
+		D70A1CB12F8E6215004AA8D9 /* XCRemoteSwiftPackageReference "mlx-swift-examples" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ml-explore/mlx-swift-examples";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.29.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A1B2C3022F7B0001009AA857 /* MLXLLM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1B2C3012F7B0001009AA857 /* XCRemoteSwiftPackageReference "mlx-swift-examples" */;
+			productName = MLXLLM;
+		};
+		A1B2C3032F7B0001009AA857 /* MLXLMCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1B2C3012F7B0001009AA857 /* XCRemoteSwiftPackageReference "mlx-swift-examples" */;
+			productName = MLXLMCommon;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D7E228112F7B8A61009AA857 /* Project object */;
 }
