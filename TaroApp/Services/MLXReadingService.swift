@@ -326,10 +326,10 @@ final class MLXReadingService: ObservableObject {
             .uniqued().prefix(5).joined(separator: "、")
 
         return """
-        ✦ 命運之鏡 · 三牌陣解讀 ✦
+        ✦ 命運之鏡 · \(cards.count == 3 ? "三" : "五")牌陣解讀 ✦
 
         \(cardNames)——
-        三張牌在此刻交匯，以「\(allKeywords)」為靈魂的線索，
+        \(cards.count == 3 ? "三" : "五")張牌在此刻交匯，以「\(allKeywords)」為靈魂的線索，
         為你編織一段獨特的命運敘事。
 
         ══════════════════════

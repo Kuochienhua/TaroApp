@@ -20,6 +20,38 @@ class GameStateViewModel: ObservableObject {
 
     private let deck = TarotDeck()
 
+    init() {
+        #if DEBUG
+        applyScreenshotLaunchArguments()
+        #endif
+    }
+
+    #if DEBUG
+    /// App Store 截圖用：`-screenshotScene drawing|reading|mystic|table|question`
+    /// 可選 `-screenshotSpread daily|classic|relationship|fiveStar`。Release 版不會編入。
+    private func applyScreenshotLaunchArguments() {
+        let defaults = UserDefaults.standard
+        guard let sceneName = defaults.string(forKey: "screenshotScene") else { return }
+        if let spreadName = defaults.string(forKey: "screenshotSpread"),
+           let spread = SpreadType(rawValue: spreadName) {
+            selectedSpread = spread
+        }
+        userQuestion = "最近工作上的轉變，會帶我走向哪裡？"
+        switch sceneName {
+        case "table":    currentScene = .table
+        case "question": currentScene = .question
+        case "mystic":   currentScene = .mystic
+        case "drawing":
+            drawnCards = deck.drawCards(for: selectedSpread)
+            currentScene = .drawing
+        case "reading":
+            drawnCards = deck.drawCards(for: selectedSpread)
+            currentScene = .reading
+        default: break
+        }
+    }
+    #endif
+
     func advance() {
         withAnimation(.easeInOut(duration: 0.5)) {
             switch currentScene {
